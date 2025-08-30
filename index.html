@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decorom Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #FAFAD2;
+            --secondary-color: #e74c3c;
+            --background-color: #f9f9f9;
+            --text-color: #333;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+        }
+
+        /* Header Styles */
+        header {
+            /*font-color: black;*/
+            font: bolder 1.5em 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            color: black;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 100px;
+            background: transparent;
+            color: black
+            /*--background-color: var(--background-color);*/
+        }
+
+        .logo img {
+            width: auto;
+            height: 85px;
+            object-fit: fill;
+            /*mix-blend-mode: screen;*/
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            color: black;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/img.png');
+            /*background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero-bg.jpg');*/
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 4rem;
+        }
+
+        #hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Filters */
+        #filters {
+            padding: 2rem;
+            background-color: var(--bg-color);
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            color: black;
+        }
+
+        /*.product-price {*/
+        /*    font-size: 1.25rem;*/
+        /*    font-weight: 600;*/
+        /*    color: var(--secondary-color);*/
+        /*    margin-bottom: 1rem;*/
+        /*}*/
+
+        .product-details {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .inquiry-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .inquiry-btn:hover {
+            background-color: #128C7E;
+        }
+
+        .button-animation {
+            position: absolute;
+            background: rgba(255,255,255,0.3);
+            width: 100%;
+            height: 100%;
+            left: -100%;
+            top: 0;
+            transform: skewX(-20deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-color);
+            color: black;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+            color: black;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: black;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a i {
+            font-size: 1.5rem;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+        /*.social-links {*/
+        /*    display: flex;*/
+        /*    gap: 1rem;*/
+        /*}*/
+
+        /*.social-links a {*/
+        /*    color: white;*/
+        /*    font-size: 1.5rem;*/
+        /*    transition: color 0.3s ease;*/
+        /*}*/
+
+        /*.social-links a:hover {*/
+        /*    color: var(--secondary-color);*/
+        /*}*/
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: auto;
+                background-color: var(--bg-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transition: 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+            }
+
+            #hero h1 {
+                font-size: 2rem;
+            }
+
+            .filter-container {
+                height: 40px;
+                padding: 0 1rem;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /*@media (max-width: 768px) {*/
+        /*    .nav-links {*/
+        /*        display: none;*/
+        /*    }*/
+
+        /*    #hero h1 {*/
+        /*        font-size: 2rem;*/
+        /*    }*/
+        /*    */
+        /*    */
+        /*    .filter-container {*/
+        /*        height: 40px;*/
+        /*        padding: 0 1rem;*/
+        /*        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));*/
+        /*    }*/
+
+        /*    .gallery-grid {*/
+        /*        grid-template-columns: 1fr;*/
+        /*    }*/
+        /*}*/
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="images/logo.png" alt="Decorom Logo">
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero" onclick="smoothScroll(event, 'hero')">Home</a></li>
+                <li><a href="#gallery" onclick="smoothScroll(event, 'gallery')">Gallery</a></li>
+                <li><a href="#contact" onclick="smoothScroll(event, 'contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+<!--    <header>-->
+<!--        <nav>-->
+<!--            <div class="logo">-->
+<!--                <img src="images/logo.png" alt="Decorom Logo">-->
+<!--            </div>-->
+<!--            <ul class="nav-links">-->
+<!--                            <li><a href="#hero" onclick="smoothScroll(event, 'hero')">Home</a></li>-->
+<!--                            <li><a href="#gallery" onclick="smoothScroll(event, 'gallery')">Gallery</a></li>-->
+<!--&lt;!&ndash;                            <li><a href="#about" onclick="smoothScroll(event, 'about')">About</a></li>&ndash;&gt;-->
+<!--                            <li><a href="#contact" onclick="smoothScroll(event, 'contact')">Contact</a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </header>-->
+
+    <main>
+        <section id="hero">
+            <h1>Welcome to Decorom Gallery</h1>
+            <p>Discover our unique collection of wall art and decorative pieces</p>
+        </section>
+
+        <section id="filters">
+            <div class="filter-container">
+                <select id="materialFilter">
+                    <option value="">All Materials</option>
+                </select>
+                <select id="shapeFilter">
+                    <option value="">All Shapes</option>
+                </select>
+<!--                <select id="priceFilter">-->
+<!--                    <option value="">Price Range</option>-->
+<!--                </select>-->
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery-grid">
+            <!-- Products will be dynamically inserted here -->
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: <a href="mailto:info@decorom.in" style="color: black;text-decoration: none;">info@decorom.in</a></p>
+<!--                <p>Email: info@decorom.in</p>-->
+                <p>Phone: <a href="tel:+919016707658" style="color: black;text-decoration: none;">+91 9016707658</a></p>
+<!--                <p>Phone: +91 9016707658</p>-->
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+<!--                <div class="social-links">-->
+<!--                    <a href="https://facebook.com/decoromindia"><i class="fab fa-facebook"></i></a>-->
+<!--                    <a href="https://instagram.com/decorom.in"><i class="fab fa-instagram"></i></a>-->
+<!--                    <a href="https://wa.me/9016707658"><i class="fab fa-whatsapp"></i></a>-->
+<!--                </div>-->
+                <div class="social-links">
+                    <a href="https://wa.me/9016707658"><i class="fab fa-whatsapp"></i> <span>+91 9016707658</span></a>
+                    <a href="https://instagram.com/decorom.in"><i class="fab fa-instagram"></i> <span>decorom.in</span></a>
+                    <a href="https://facebook.com/decoromindia"><i class="fab fa-facebook"></i> <span>decoromindia</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Decorom Gallery. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+	const products = [
+        {id: 1, name: "Shri Krishna's    fute and feather", link: "images/1.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "24x60 inches", description: "black with golden miiror acrylic latters"},
+        {id: 2, name: "clipart with house tree & birds ", link: "images/2.jpeg", price: 12000, material: "Acrylic", shape: "Circle", size: "24x24 inches", description: "white Background with black font and warm white LED lights"},
+        {id: 3, name: "Silver SS with Black Vinyl Fonts", link: "images/3.jpeg", price: 2880, material: "Stainless Steel", shape: "Square", size: "24x24 inches", description: "SS 302, with black iching font name plates"},
+        {id: 4, name: "Gada of Shri Hanuman", link: "images/4.jpeg", price: 0, material: "Acrylic", shape: "Square", size: "24x24 inches", description: "Red Acrylic with golden letters"},
+        {id: 5, name: "Matte Black Background with Golden Acrylic", link: "images/5.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "12x18 inches", description: "Black Background with Golden Acrylic"},
+        {id: 6, name: "Matte White with Golden Acrylic Letters", link: "images/6.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "12x24 inches", description: "Matte White with Golden Acrylic Letters"},
+        {id: 7, name: "Shivangan with Shiv Trishul", link: "images/7.jpeg", price: 0, material: "Acrylic", shape: "Circle", size: "24x24 inches", description: "Black with Golden Letters Acrylic"},
+        {id: 8, name: "Black Background with White letters and Warm White Light", link: "images/8.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "24x60 inches", description: "Black Background with White letters and Warm White Light with Waterproffing"},
+        {id: 9, name: "White background with leaves printed", link: "images/9.jpeg", price: 0, material: "Acrylic", shape: "Circle", size: "24x24 inches", description: "White background with leaves printed"},
+        {id: 10, name: "Leaves with Name", link: "images/10.jpeg", price: 0, material: "Acrylic", shape: "Circle", size: "24x24 inches", description: "Golden Acrylic with Black Vinyl"},
+        {id: 11, name: "Matte Black with golden acrylic letters", link: "images/11.jpeg", price: 0, material: "Acrylic", shape: "Circle", size: "24x24 inches", description: "Matte Black with golden acrylic letters"},
+        {id: 12, name: "Unique Name plate in mild steel (ms) and stainless steel", link: "images/12.jpeg", price: 0, material: "Stainless Steel", shape: "Unique", size: "12x24 inches", description: "MS Fonts with Golden Stainless Steel 304 grade"},
+        {id: 13, name: "Black Background with Golden Acrylic letters", link: "images/13.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "12x24 inches", description: "Black Background with Golden Acrylic letters"},
+        {id: 14, name: "Black Background with Golden Acrylic letters", link: "images/14.jpeg", price: 0, material: "Acrylic", shape: "Circle", size: "24x24 inches", description: "Black Background with Golden Acrylic letters"},
+        {id: 15, name: "Black Background with Golden Acrylic letters", link: "images/15.jpeg", price: 0, material: "Acrylic", shape: "Circle", size: "24x24 inches", description: "Black Background with Golden Acrylic letters"},
+        {id: 16, name: "Acrylic name plate with Krishna flute and feather", link: "images/16.jpeg", price: 0, material: "Acrylic", shape: "Circle", size: "24x24 inches", description: "Black Background with Golden Acrylic letters  with Krishna flute and feather"},
+        {id: 17, name: "Mantra", link: "images/17.jpeg", price: 0, material: "Acrylic", shape: "Square", size: "24x24 inches", description: "White Background with Golden Acrylic Letters and framing"},
+        {id: 18, name: "Rose Gold SS(Stainless steel) with White Acrylic Letterrs", link: "images/18.jpeg", price: 0, material: "Stainless Steel", shape: "Oval", size: "24x60 inches", description: "Rose Gold SS with White Acrylic Letters"},
+        {id: 19, name: "White background with Golden Acrylic Letters", link: "images/19.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "12x24 inches", description: "White background with Golden Acrylic Letters"},
+        {id: 20, name: "MS letters with Golden SS background", link: "images/20.jpeg", price: 0, material: "Stainless Steel", shape: "Unique", size: "12x24 inches", description: "MS letters with Golden SS background"},
+        {id: 21, name: "Golden Background with Black Acrylic", link: "images/21.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "12x24 inches", description: "Golden Background with Black Acrylic"},
+        {id: 22, name: "Golden Acrylic with Black Vinyl", link: "images/22.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "9x18 inches", description: "Golden Acrylic with Black Vinyl"},
+        {id: 23, name: "White Acrylic letters with ACP background", link: "images/23.jpeg", price: 0, material: "Wood", shape: "Rectangle", size: "18x24 inches", description: "White Acrylic letters with ACP background"},
+        {id: 24, name: "Golden Acrylic letters with ACP background", link: "images/24.jpg", price: 0, material: "Wood", shape: "Rectangle", size: "12x24 inches", description: "Golden Acrylic letters with ACP background"},
+        {id: 25, name: "White Acrylic letters with ACP round background", link: "images/25.jpeg", price: 0, material: "Wood", shape: "Circle", size: "24x24 inches", description: "White Acrylic letters with ACP round background with backlight"},
+        {id: 26, name: "Glass Acrylic with printed company logo and GST no.", link: "images/26.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "12x24 inches", description: "Glass Acrylic with printed company logo and GST no."},
+        {id: 27, name: "Unique Design in Stainless Steel", link: "images/27.jpeg", price: 0, material: "Stainless Steel", shape: "Rectangle", size: "24x36 inches", description: "Unique Design in Rose Gold SS with Warm White Backlight"},
+        {id: 28, name: "White Acrylic with golden letters in Unique Shape", link: "images/28.jpeg", price: 0, material: "Acrylic", shape: "Unique", size: "12x24 inches", description: "White Acrylic with Golden Acrylic Letters"},
+        {id: 29, name: "Stainless Steel Letters with Krishna Flute and Feather", link: "images/29.jpg", price: 0, material: "Stainless Steel", shape: "Unique", size: "24x48 inches", description: "Stainless Steel Letters with Krishna Flute and Feather"},
+        {id: 30, name: "White Acrylic with ACP background and unique shape", link: "images/30.jpeg", price: 0, material: "Wood", shape: "Unique", size: "12x24 inches", description: "White Acrylic with ACP background and unique shape"},
+        {id: 31, name: "Unique Design Printed on White Acrylic", link: "images/31.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "12x24 inches", description: "Unique Design Printed on White Acrylic"},
+        {id: 32, name: "Whie Acrylic with Golden Acrylic Letters", link: "images/32.jpeg", price: 0, material: "Acrylic", shape: "Circle", size: "24x24 inches", description: "Whie Acrylic with Golden Acrylic Lettersq"},
+        {id: 33, name: "Whie Acrylic with Green Sticker Letters", link: "images/33.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "12x24 inches", description: "Whie Acrylic with Green Stickers Letters"},
+        {id: 34, name: "White Acrylic with Red Stickers and warm white light", link: "images/34.jpeg", price: 0, material: "Acrylic", shape: "Unique", size: "12x24 inches", description: "White Acrylic with Red Stickers and warm white light"},
+        {id: 35, name: "Cream Acrylic with ACP Background", link: "images/35.jpeg", price: 0, material: "Wood", shape: "Rectangle", size: "12x18 inches", description: "Cream Acrylic letters with ACP background"},
+        {id: 36, name: "White Background with Black Acrylic Letters", link: "images/36.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "24x36 inches", description: "White Background with Black Acrylic Letters"},
+        {id: 37, name: "White Glass Acrylic with Black Letters", link: "images/37.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "12x24 inches", description: "White Glass Acrylic with Black Letters and House Logo with Shri Ganesh"},
+        {id: 38, name: "Black Acrylic with  White Letters", link: "images/38.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "12x24 inches", description: "Black Acrylic with  White Letters with warm white light"},
+        {id: 39, name: "Black Acrylic with Golden Letters", link: "images/39.jpeg", price: 0, material: "Acrylic", shape: "Square", size: "24x24 inches", description: "Black Acrylic with Golden Letters"},
+        {id: 40, name: "White Acrylic Glass with Black Acrylic", link: "images/40.jpeg", price: 0, material: "Acrylic", shape: "Oval", size: "12x18 inches", description: "White Acrylic Glass with Black Acrylic"},
+        {id: 41, name: "White Acrylic with Golden Acrylic Letters", link: "images/41.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "12x24 inches", description: "White Acrylic with Golden Acrylic Letters"},
+        {id: 42, name: "White Background with Black MS letters", link: "images/42.jpeg", price: 0, material: "Stainless Steel", shape: "Rectangle", size: "24x36 inches", description: "Black MS Fonts"},
+        {id: 43, name: "White Glass Acrylic with Red Sticker and White Acrylic letters", link: "images/43.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "18x24 inches", description: "White Glass Acrylic with Red Sticker and White Acrylic letters"},
+        {id: 44, name: "Coffee Cream Background with Cream Letters", link: "images/44.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "24x36 inches", description: "Coffee Cream Background with Cream Letters"},
+        {id: 45, name: "Whie Background with Golden Acrylic Letters and Yellow sticker", link: "images/45.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "18x24 inches", description: "Whie Background with Golden Acrylic Letters and Yellow sticker"},
+        {id: 46, name: "Brown Letters with ACP background", link: "images/46.jpeg", price: 0, material: "Wood", shape: "Rectangle", size: "18x24 inches", description: "Brown Letters with ACP background"},
+        {id: 47, name: "Stainless steel with warm white light", link: "images/47.jpeg", price: 0, material: "Stainless Steel", shape: "Rectangle", size: "24x36 inches", description: "Stainless steel with warm white light"},
+        {id: 48, name: "SS with black vinyl letters", link: "images/48.jpeg", price: 0, material: "Stainless Steel", shape: "Rectangle", size: "18x24 inches", description: "Stainless Steel background with black vinyl letters"},
+        {id: 49, name: "Gold, White Acrylic Letters with Round ACP", link: "images/49.jpeg", price: 0, material: "Wood", shape: "Circle", size: "24x24 inches", description: "Golden, White Acrylic Letters with Round ACP background"},
+        {id: 50, name: "Company Name And Company Logo", link: "images/50.jpeg", price: 0, material: "Acrylic", shape: "Unique", size: "12x18 inches", description: "Company Name in Black Background and Golden Acrylic LettersLogo in Red Backgroound and White Letters"},
+        {id: 51, name: "White Acrylic with Golden Letters with warm white light", link: "images/51.jpeg", price: 0, material: "Acrylic", shape: "Circle", size: "24x24 inches", description: "White Acrylic with Golden Letters with warm white light"},
+        {id: 52, name: "Acrylic Letters on Marbel", link: "images/52.jpeg", price: 0, material: "Acrylic", shape: "Circle", size: "24x24 inches", description: "Golden Acrylic Letters on Marbel with warm white light"},
+        {id: 53, name: "Black Acrylic with  White Letters", link: "images/53.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "9x18 inches", description: "Black Steel Background with cutting fonts"},
+        {id: 54, name: "White Acrylic Letters with ACP", link: "images/54.jpeg", price: 0, material: "Wood", shape: "Circle", size: "24x24 inches", description: "White Acrylic Letters with ACP background"},
+        {id: 55, name: "Black Acrylic with Silver Letters", link: "images/55.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "9x18 inches", description: "Black Stainless Steel background with Silver fonts"},
+        {id: 56, name: "Black Acrylic with Gold Letters", link: "images/56.jpeg", price: 0, material: "Acrylic", shape: "Rectangle", size: "9x18 inches", description: "Black Stainless Steel background with Golden fonts"},
+        {id: 57, name: "Black Acrylic with White Letters", link: "images/57.jpeg", price: 0, material: "Stainless Steel", shape: "Rectangle", size: "12x18 inches", description: "Silver Stainless Steel background with Black Vinyl fonts"},
+        {id: 58, name: "Silver SS with Black Vinyl fonts", link: "images/58.jpeg", price: 0, material: "Stainless Steel", shape: "Square", size: "24x24 inches", description: "Silver Stainless Steel background with Black Vinyl fonts"},
+        {id: 59, name: "Silver SS with Black Vinyl fonts", link: "images/59.jpg", price: 0, material: "Stainless Steel", shape: "Rectangle", size: "18x30 inches", description: "Silver Stainless Steel background with Black Vinyl fonts"},
+        {id: 60, name: "Golden SS with Black MS fonts", link: "images/60.jpg", price: 0, material: "Stainless Steel", shape: "Square", size: "18x30 inches", description: "Golden Stainless Steel background with Black MS fonts"},
+        {id: 61, name: "Golden Acrylic Letters & Silver Lotus with warm white light", link: "images/61.jpg", price: 0, material: "Acrylic", shape: "Unique", size: "24x48 inches", description: "Golden Acrylic Fonts with Silver Lotus with warm white light"}
+    ];
+  
+        // Main functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize filters
+            // const materials = [...new Set(products.map(p => p.material))];
+            // const shapes = [...new Set(products.map(p => p.shape))];
+            const materials = ["Acrylic", "Wood", "Stainless Steel"];
+            const shapes = ["Square", "Rectangle", "Circle", "Oval", "Unique"];
+            const materialFilter = document.getElementById('materialFilter');
+            const shapeFilter = document.getElementById('shapeFilter');
+            
+            // Populate filter options
+            materials.forEach(material => {
+                const option = document.createElement('option');
+                option.value = material;
+                option.textContent = material;
+                materialFilter.appendChild(option);
+            });
+            
+            shapes.forEach(shape => {
+                const option = document.createElement('option');
+                option.value = shape;
+                option.textContent = shape;
+                shapeFilter.appendChild(option);
+            });
+            
+            // Function to render products
+            function renderProducts(productsToRender) {
+                const gallery = document.querySelector('.gallery-grid');
+                gallery.innerHTML = '';
+                
+                productsToRender.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    
+                    productCard.innerHTML = `
+                        <img src="${product.link}" alt="${product.name}" class="product-image">
+                        <div class="product-info">
+                            <h3>${product.name}</h3>
+                            <div class="product-details">
+                                <p>Material: ${product.material}</p>
+                                <p>Shape: ${product.shape}</p>
+                                <p>Size: ${product.size}</p>
+                            </div>
+                            <button class="inquiry-btn" onclick="sendWhatsAppInquiry(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                                Inquiry Now
+                                <span class="button-animation"></span>
+                            </button>
+                        </div>
+                    `;
+                    
+                    gallery.appendChild(productCard);
+                });
+            }
+
+            // Filter products
+            function filterProducts() {
+                const materialValue = materialFilter.value;
+                const shapeValue = shapeFilter.value;
+                
+                let filtered = products;
+                
+                if (materialValue) {
+                    filtered = filtered.filter(p => p.material === materialValue);
+                }
+                
+                if (shapeValue) {
+                    filtered = filtered.filter(p => p.shape === shapeValue);
+                }
+                
+                renderProducts(filtered);
+            }
+            
+            // Add filter event listeners
+            materialFilter.addEventListener('change', filterProducts);
+            shapeFilter.addEventListener('change', filterProducts);
+            
+            // Initial render
+            renderProducts(products);
+        });
+
+        // Smooth scroll function
+        function smoothScroll(e, targetId) {
+            e.preventDefault();
+            const target = document.getElementById(targetId);
+            target.scrollIntoView({ behavior: 'smooth' });
+            // Close mobile menu after clicking a link
+            document.querySelector('.nav-links').classList.remove('active');
+        }
+
+        // Toggle mobile menu
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        // WhatsApp inquiry function
+        function sendWhatsAppInquiry(product) {
+            const message = encodeURIComponent(
+                `Hi, I'm interested in:\n\n` +
+                `Product_Id: ${product.id}\n` +
+                `Product_Name: ${product.name}\n` +
+                `Material: ${product.material}\n` +
+                `Shape: ${product.shape}\n` +
+                `Size: ${product.size}\n\n` +
+                `Please provide more information about this product.`
+            );
+            window.open(`https://wa.me/9016707658?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
