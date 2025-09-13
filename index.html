@@ -6,6 +6,7 @@
     <title>Decorom Gallery</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta property="og:image" content="https://decorom.in/28.jpeg">
     <style>
         :root {
             --bg-color: #FAFAD2;
@@ -589,7 +590,7 @@
         function sendWhatsAppInquiry(product) {
             const message = encodeURIComponent(
                 `Hi, I'm interested in:\n\n` +
-				`Image: decorom.in/images/${product.id}.jpeg\n` +
+				`Image: decorom.in/${product.link}\n` +
                 //`Product_Id: ${product.id}\n` +
                 `Product_Name: ${product.name}\n` +
                 `Material: ${product.material}\n` +
